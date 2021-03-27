@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- <style>
+      body {
+        background-image: url("bg.jpg");
+      }
+    </style> -->
+    <!-- Required meta tags -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+
+    <title>Open new Bank Account</title>
+  </head>
+  <body class="bg-dark vh-100 ">
+    <div class="container-fluid vh-100">
+      <div class="row align-items-center vh-100">
+        <div class="col-3 p-3 bg-white mx-auto rounded-3">
+          <h3>Open a new bank account</h3>
+          <form method="POST", action="/register">
+            <div class="mb-3">
+              <label for="FirstName" class="form-label">First Name:</label>
+              <input type="text" class="form-control" id="FirstName" name="FirstName" required>
+            </div>
+            <div class="mb-3">
+              <label for="LastName" class="form-label">Last Name:</label>
+              <input type="text" class="form-control" id="LastName" name="LastName" required>
+            </div>
+            <div class="mb-3">
+              <label for="IdNumber" class="form-label">ID Number:</label>
+              <input type="text" class="form-control" id="IdNumber" name="IdNumber" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Adress:</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="PhoneNumber" class="form-label">Phone Number:</label>
+              <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" required>
+            </div>
+            <div class=row>
+              <div class="col">
+                <div class="mb-3">
+              <label for="StreetAdress" class="form-label">Street Adress:</label>
+              <input type="text" class="form-control" id="StreetAdress" name="StreetAdress" required>
+            </div>
+              </div>
+              <div class="col-4">
+                <div class="mb-3">
+              <label for="ZipCode" class="form-label">Zip Code:</label>
+              <input type="text" class="form-control" id="ZipCode" name="ZipCode" required>
+            </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="city" class="form-label">City:</label>
+              <select class="form-select" aria-label="Default select example" id="city" name="city" required>
+                <option value="None" selected disabled>Please select a city</option>
+                {% for city in cities %}
+                  <option value="{{city.id}}">{{ city.city }}</option>
+                {% endfor %}>
+              </select>
+            </div>
+            <button type="submit" id="sumbit" class="btn btn-primary">Submit</button>
+          </form>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message|safe}}
+          </div>
+          {% endif%}
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"></script>
+      <script type=text/javascript>
+  $(function() {
+    $('#submit').bind('click', function() {
+      $.getJSON('https://ide-87bb62580e7b4b5badf4a386a497ae58-8080.cs50.ws/' + '/register_check', {
+        a: $('#FirstName').val()
+      }, function(data) {
+        $("#result").text(data.result);
+      });
+      return false;
+    });
+  });
+</script>
+  </body>
+</html>

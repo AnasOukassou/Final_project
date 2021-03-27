@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title%}
+  Transfer Money
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-3 p-3 bg-white rounded-3 mx-auto">
+          <h3>Change password</h3>
+          <p>A $1 fee will be deducted from your account.</p>
+          <form method="POST" action="/transfer_money">
+            <div class="mb-3">
+              <label for="bank_account" class="form-label">Recipient's Bank account:</label>
+              <input type="text" class="form-control" id="rec_name" name="bank_account" value="{{user_input}}">
+            </div>
+            <div class="mb-3">
+              <label for="amount" class="form-label">Amount:</label>
+              <input type="text" class="form-control" id="amount" name="amount">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+{%endblock%}

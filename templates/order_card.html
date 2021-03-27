@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title%}
+  Order new card
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-3 p-3 bg-white rounded-3 mx-auto">
+          <h3>Order a new Credit/Debit Card</h3>
+          <p>A $15.00 fee will be deducted from your bank account</p>
+          <form method="POST" action="/order_card">
+            <div class="mb-3">
+              <label for="city" class="form-label">Please choose a Credit/Debit Card:</label>
+              <select class="form-select" aria-label="Default select example" id="card" name="card" required>
+                <option value="None" selected disabled>Payment provider</option>
+                <option value="VISA">VISA</option>
+                <option value="MASTERCARD">MASTERCARD</option>
+                <option value="AMEX">AMERICAN EXPRESS</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+{%endblock%}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title%}
+  History
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-7 p-3 bg-white rounded-3 mx-auto">
+      <h3 class="text-center">Transactions History</h3>
+      <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Transaction Id</th>
+      <th scope="col">Timestamp</th>
+      <th scope="col">Symbol</th>
+      <th scope="col">Symbol Name</th>
+      <th scope="col">Action</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td>{{row.transaction_id}}</td>
+      <td>{{row.date}}</td>
+      <td>{{row.symbol}}</td>
+      <td>{{row.symbol_name}}</td>
+      <td>{{row.action}}</td>
+      <td>{{row.quantity}}</td>
+      {% if row.action == 'sell' %}
+        <td class="text-success">+{{usd(row.unit_price)}}</td>
+      {% endif %}
+      {% if row.action == 'buy' %}
+        <td class="text-danger">-{{usd(row.unit_price)}}</td>
+      {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+{%endblock%}

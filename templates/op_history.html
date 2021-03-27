@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title%}
+  Transactions History
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-5 p-3 bg-white rounded-3 mx-auto">
+      <h3 class="text-center">Transactions History</h3>
+      <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">From</th>
+      <th scope="col">To</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <th scope="row">{{row.date}}</th>
+      <td>{{row.send_first}} {{row.send_last}}</td>
+      <td>{% if row.rec_first and row.rec_last %} {{row.rec_first}} {{row.rec_last}} {% endif %}</td>
+      <td class="{% if row.from_id==user%}text-danger">-{{usd(row.amount)}} {% endif %}
+          {% if row.from_id!=user%}text-success">+{{usd(row.amount)}} {% endif %}</td>
+      <td>{{row.COMMENT}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+{%endblock%}

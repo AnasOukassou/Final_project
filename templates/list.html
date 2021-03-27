@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title%}
+  Favorite List
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-5 p-3 bg-white rounded-3 mx-auto">
+      <div class="row align-items-center mb-4">
+        <div class="col-auto mx-auto">
+          <form method="POST" action="/list_favorites">
+            <div class="row align-items-cente">
+              <div class="col-auto">
+                <label for="favorite" class="col-form-label">User's email address</label>
+              </div>
+              <div class="col-auto">
+              <input type="email" class="form-control" id="favorite" name="favorite">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Add to favorite</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Bank account</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if length != 0%}
+    {% for i in range(length) %}
+    <tr>
+      <th scope="row">{{i + 1}}</th>
+      <td>{{rows[i].firstname}}</td>
+      <td>{{rows[i].lastname}}</td>
+      <td>{{rows[i].bank_account}}</td>
+      <td>
+        <div class="row">
+          <div class="col-auto">
+            <a href="/transfer_money?bank_account={{rows[i].bank_account}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Send Money">
+              <i class="bi bi-cash text-success"></i>
+            </a>
+          </div>
+          <div class="col-auto">
+            <a href="/remove_favorite?id={{rows[i].fav_id}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove from list">
+              <i class="bi bi-person-dash-fill text-danger"></i>
+            </a>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+{%endblock%}

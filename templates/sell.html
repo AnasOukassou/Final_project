@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title%}
+  Sell Stocks
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-3 p-3 bg-white rounded-3 mx-auto">
+          <h3>Search for a Symbol</h3>
+          <form method="POST" action="/sell">
+            <div class="mb-3">
+              <label for="symbol" class="form-label">Symbol:</label>
+              <select type="text" class="form-select" id="symbol" name="symbol">
+                <option value="None" selected disabled>Please select a symbol</option>
+                {% for row in rows %}
+                  <option value="{{row.symbol}}">{{row.symbol_name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="share" class="form-label">Number of shares:</label>
+              <input type="text" class="form-control" id="share" name="share">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+{%endblock%}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title%}
+  Portfolio
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-7 p-3 bg-white rounded-3 mx-auto">
+      <h3 class="text-center">Transactions History</h3>
+      <table class="table table-striped mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Symbol Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td>{{row.symbol}}</td>
+      <td>{{row.symbol_name}}</td>
+      <td>{{row.SUM}}</td>
+      <td>{{usd(lookup(row.symbol)['price'])}}</td>
+      <td>{{usd(row.SUM * lookup(row.symbol)['price'])}}</td>
+    </tr>
+    {% endfor %}
+    <tfoot>
+      <tr>
+      <td colspan="4" class="text-end"><strong>Cash</strong></td>
+      <td>{{amount}}</td>
+    </tr>
+    <tr>
+      <td colspan="4" class="text-end"><strong>Total</strong></td>
+      <td>{{total}}</td>
+    </tr>
+    </tfoot>
+  </tbody>
+</table>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+{%endblock%}

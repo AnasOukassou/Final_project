@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title%}
+  Buy Stocks
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-3 p-3 bg-white rounded-3 mx-auto">
+          <h3>Search for a Symbol</h3>
+          <form method="POST" action="/buy">
+            <div class="mb-3">
+              <label for="symbol" class="form-label">Sumbol:</label>
+              <input type="text" class="form-control" id="symbol" name="symbol">
+            </div>
+            <div class="mb-3">
+              <label for="shares" class="form-label">Number of shares:</label>
+              <input type="text" class="form-control" id="shares" name="shares">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message|safe}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+{%endblock%}

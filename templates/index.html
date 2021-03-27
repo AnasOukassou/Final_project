@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title%}
+  History
+{% endblock %}
+{% block main %}
+<div class="row vh-100 align-items-center">
+    <div class="col-5 p-3 bg-white rounded-3 mx-auto">
+      <h3 class="border-bottom border-dark">Welcome, {{firstname}} {{lastname}} !</h3>
+      <p>Account Number: {{account}}</p>
+      <p>Account Balance: {{amount}}</p>
+
+          {% if message%}
+          <div class="alert alert-{{msg_type}} mt-3" role="alert">
+              {{message}}
+          </div>
+          {% endif%}
+        </div>
+</div>
+</div>
+{%endblock%}
