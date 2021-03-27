@@ -19,7 +19,7 @@ Examples:<br/><br/>
 | ------------- | ------------- |-----| --| --|
 | 4929109347192550  |03/24  | 263 | VISA | 9351002612 |
 | 5504635667816330 | 03/24  |700| MASTERCARD | 9351002596 |
-|-------------------|------|---|--------|-----|
+<br/><br/>
 The user can also buy and sell stocks and manage the portfolio (more advanced functionalities will be added). The stock market section use IEX Cloud API service to retrieve quotes.
 <br/><br/>
 The project contains the following files:<br>
